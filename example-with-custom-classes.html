@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <title>Recommendations Component Example</title>
+  </head>
+  <body>
+    <a href="./">&lt; Back</a>
+
+    <h1>Example Recommendations Component with custom classes</h1>
+    <div id="cru-recommendations-component-with-custom-classes"></div>
+
+    <script src="./index.ts"></script>
+    <script>
+      window.cruRecommendationsComponent.render(
+        document.querySelector(
+          '#cru-recommendations-component-with-custom-classes',
+        ),
+        {
+          wrapper: 'example-wrapper',
+          card: 'example-card',
+          image: 'example-image',
+          title: 'example-title',
+          description: 'example-description',
+        },
+      );
+    </script>
+  </body>
+</html>

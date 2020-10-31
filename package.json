@@ -1,0 +1,16 @@
+{
+  "name": "recommendations-component",
+  "version": "1.0.0",
+  "description": "Component to embed recommendations on content websites",
+  "repository": "https://github.com/CruGlobal/recommendations-component",
+  "author": "Scotty Waggoner <ozzieorca@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "start": "parcel serve *.html index.ts",
+    "build": "parcel build *.html index.ts --dist-dir dist --public-url ./"
+  },
+  "devDependencies": {
+    "parcel": "^2.0.0-beta.1"
+  }
+}
