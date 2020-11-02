@@ -1,6 +1,6 @@
 {
   "name": "@cruglobal/recommendations-component",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Component to embed recommendations on content websites",
   "repository": "https://github.com/CruGlobal/recommendations-component",
   "author": "Scotty Waggoner <ozzieorca@gmail.com>",

@@ -14,8 +14,15 @@ jobs:
           node-version: 14
           registry-url: https://registry.npmjs.org/
           scope: '@cruglobal'
-      - run: yarn
-      - run: yarn build
-      - run: yarn publish --access public --new-version ${{ github.event.release.tag_name }}
+      - name: 📦 Install Dependencies
+        run: yarn
+      - name: 🏗️ Build
+        run: yarn build
+      - name: 👤 Configure git
+        run: |
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'github-action@users.noreply.github.com'
+      - name: 🎁 Publish package to NPM and bump version
+        run: yarn publish --access public --new-version ${{ github.event.release.tag_name }}
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
