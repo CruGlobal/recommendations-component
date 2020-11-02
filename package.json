@@ -1,5 +1,5 @@
 {
-  "name": "recommendations-component",
+  "name": "@cruglobal/recommendations-component",
   "version": "1.0.0",
   "description": "Component to embed recommendations on content websites",
   "repository": "https://github.com/CruGlobal/recommendations-component",
