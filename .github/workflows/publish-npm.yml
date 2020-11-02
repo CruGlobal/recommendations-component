@@ -16,6 +16,6 @@ jobs:
           scope: '@cruglobal'
       - run: yarn
       - run: yarn build
-      - run: yarn publish --access public
+      - run: yarn publish --access public --new-version ${{ github.event.release.tag_name }}
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
