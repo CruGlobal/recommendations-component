@@ -1,6 +1,6 @@
 interface Recommendation {
   title: string;
-  description: string;
+  category: string;
   uri: string;
   imageUri: string;
 }
@@ -8,19 +8,19 @@ interface Recommendation {
 const recommendations: Recommendation[] = [
   {
     title: 'Test',
-    description: 'Some description',
+    category: 'Fasting',
     uri: 'https://cru.org',
-    imageUri: 'https://via.placeholder.com/150',
+    imageUri: 'https://via.placeholder.com/300x200',
   },
   {
     title: 'Second Test',
-    description: 'Some description',
+    category: 'Fasting',
     uri: 'https://cru.org',
-    imageUri: 'https://via.placeholder.com/150',
+    imageUri: 'https://via.placeholder.com/400',
   },
   {
     title: 'Third Test',
-    description: 'Some description',
+    category: 'Fasting',
     uri: 'https://cru.org',
     imageUri: 'https://via.placeholder.com/150',
   },
@@ -28,20 +28,22 @@ const recommendations: Recommendation[] = [
 
 interface CssClasses {
   wrapper: string;
+  header: string;
   card: string;
   image: string;
+  category: string;
   title: string;
-  description: string;
 }
 
 const classPrefix = 'cru-recommendations-component';
 
 const defaultClasses: CssClasses = {
   wrapper: classPrefix,
+  header: `${classPrefix}-header`,
   card: `${classPrefix}-card`,
   image: `${classPrefix}-image`,
+  category: `${classPrefix}-category`,
   title: `${classPrefix}-title`,
-  description: `${classPrefix}-description`,
 };
 
 export const recommendationsToHTML = (
@@ -49,14 +51,15 @@ export const recommendationsToHTML = (
   classes: CssClasses,
 ) => `
 <div class="${classes.wrapper}">
+  <h1 class="${classes.header}">Recommended Articles</h1>
 ${recommendations.reduce(
-  (output, { title, description, uri, imageUri }) =>
+  (output, { title, category, uri, imageUri }) =>
     `${output}
     
   <a href="${uri}" class="${classes.card}">
     <img src="${imageUri}" class="${classes.image}" />
-    <h2 class="${classes.title}">${title}</h1>
-    <p class="${classes.description}">${description}</p>
+    <h2 class="${classes.category}">${category}</h2>
+    <h3 class="${classes.title}">${title}</h3>
   </a>`,
   '',
 )}
