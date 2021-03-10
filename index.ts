@@ -53,10 +53,14 @@ export const recommendationsToHTML = (
 <div class="${classes.wrapper}">
   <h1 class="${classes.header}">Recommended Articles</h1>
 ${recommendations.reduce(
-  (output, { title, category, uri, imageUri }) =>
+  (output, { title, category, uri, imageUri }, index) =>
     `${output}
     
-  <a href="${uri}" class="${classes.card}">
+  <a href="${uri}" class="${classes.card}" id="${classPrefix}-recommendation-${
+      index + 1
+    }" onclick="window.dataLayer?.push({ event:'recommendation-click', recommendationNumber: ${
+      index + 1
+    }, recommendationImageUri: '${imageUri}', recommendationTitle: '${title}' })">
     <img src="${imageUri}" class="${classes.image}" />
     <h2 class="${classes.category}">${category}</h2>
     <h3 class="${classes.title}">${title}</h3>
