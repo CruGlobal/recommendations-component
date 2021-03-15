@@ -43,8 +43,10 @@ ${recommendations.reduce(
       index + 1
     }, recommendationImageUri: '${imageUri}', recommendationTitle: '${title}' })">
     <img src="${imageUri}" class="${classes.image}" alt="${title}" />
-    <h2 class="${classes.category}">${category}</h2>
-    <h3 class="${classes.title}">${title}</h3>
+    <div>
+      <h2 class="${classes.category}">${category}</h2>
+      <h3 class="${classes.title}">${title}</h3>
+    </div>
   </a>`,
   '',
 )}
