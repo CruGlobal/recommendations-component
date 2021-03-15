@@ -2,7 +2,7 @@
   font-family: Source Sans Pro, Sans-Serif;
   font-weight: bold;
   color: #383f43;
-  width: 217px;
+  width: 100%;
 }
 .cru-recommendations-component a,
 .cru-recommendations-component a:active,
@@ -50,4 +50,12 @@
   .cru-recommendations-component-card:hover
   .cru-recommendations-component-title {
   color: #5a5a5a;
+}
+
+@media (min-width: 350px) and (max-width: 991px) {
+  .cru-recommendations-component .cru-recommendations-component-card {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    column-gap: 12px;
+  }
 }
