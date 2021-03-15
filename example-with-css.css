@@ -30,11 +30,20 @@
   display: block;
   margin-bottom: 24px;
 }
+.cru-recommendations-component
+  .cru-recommendations-component-card:hover
+  .cru-recommendations-component-image {
+  transform: scale(1.1);
+}
+.cru-recommendations-component .cru-recommendations-component-image-wrapper {
+  overflow: hidden;
+  margin-bottom: 12px;
+}
 .cru-recommendations-component .cru-recommendations-component-image {
   display: block;
   width: 100%;
   border-radius: 4px;
-  margin-bottom: 12px;
+  transition: all 0.25s cubic-bezier(0.785, 0.135, 0.15, 0.86) 0s;
 }
 .cru-recommendations-component .cru-recommendations-component-category {
   font-size: 14px;
@@ -48,7 +57,7 @@
 .cru-recommendations-component
   .cru-recommendations-component-card:hover
   .cru-recommendations-component-title {
-  color: #5a5a5a;
+  text-decoration: underline;
 }
 
 @media (min-width: 350px) and (max-width: 991px) {
