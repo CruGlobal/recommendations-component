@@ -1,30 +1,11 @@
 interface Recommendation {
-  title: string;
-  category: string;
   uri: string;
+  title: string;
   imageUri: string;
+  category: string;
 }
 
-const recommendations: Recommendation[] = [
-  {
-    title: 'Test',
-    category: 'Fasting',
-    uri: 'https://cru.org',
-    imageUri: 'https://via.placeholder.com/300x200',
-  },
-  {
-    title: 'Second Test',
-    category: 'Fasting',
-    uri: 'https://cru.org',
-    imageUri: 'https://via.placeholder.com/400',
-  },
-  {
-    title: 'Third Test',
-    category: 'Fasting',
-    uri: 'https://cru.org',
-    imageUri: 'https://via.placeholder.com/150',
-  },
-];
+const apiUri = 'https://cru-content-based-filtering.s3.amazonaws.com/';
 
 interface CssClasses {
   wrapper: string;
@@ -37,7 +18,7 @@ interface CssClasses {
 
 const classPrefix = 'cru-recommendations-component';
 
-const defaultClasses: CssClasses = {
+const defaultClassNames: CssClasses = {
   wrapper: classPrefix,
   header: `${classPrefix}-header`,
   card: `${classPrefix}-card`,
@@ -46,7 +27,7 @@ const defaultClasses: CssClasses = {
   title: `${classPrefix}-title`,
 };
 
-export const recommendationsToHTML = (
+const recommendationsToHTML = (
   recommendations: Recommendation[],
   classes: CssClasses,
 ) => `
@@ -61,7 +42,7 @@ ${recommendations.reduce(
     }" onclick="window.dataLayer?.push({ event:'recommendation-click', recommendationNumber: ${
       index + 1
     }, recommendationImageUri: '${imageUri}', recommendationTitle: '${title}' })">
-    <img src="${imageUri}" class="${classes.image}" />
+    <img src="${imageUri}" class="${classes.image}" alt="${title}" />
     <h2 class="${classes.category}">${category}</h2>
     <h3 class="${classes.title}">${title}</h3>
   </a>`,
@@ -71,11 +52,26 @@ ${recommendations.reduce(
 `;
 
 export const cruRecommendationsComponent = {
-  render: (container: Element, customClasses?: Partial<CssClasses>) => {
-    container.innerHTML = recommendationsToHTML(recommendations, {
-      ...defaultClasses,
-      ...customClasses,
-    });
+  render: async (
+    container: Element,
+    {
+      uri = window.location.href,
+      classNames,
+    }: { uri?: string; classNames?: Partial<CssClasses> } = {},
+  ) => {
+    try {
+      const response = await fetch(`${apiUri}${encodeURIComponent(uri)}.json`);
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      const recommendations: Recommendation[] = await response.json();
+      container.innerHTML = recommendationsToHTML(recommendations, {
+        ...defaultClassNames,
+        ...classNames,
+      });
+    } catch (error) {
+      throw new Error(`Error loading/rendering recommendations: ${error}`);
+    }
   },
 };
 
