@@ -11,6 +11,7 @@ interface CssClasses {
   wrapper: string;
   header: string;
   card: string;
+  imageWrapper: string;
   image: string;
   category: string;
   title: string;
@@ -22,6 +23,7 @@ const defaultClassNames: CssClasses = {
   wrapper: classPrefix,
   header: `${classPrefix}-header`,
   card: `${classPrefix}-card`,
+  imageWrapper: `${classPrefix}-image-wrapper`,
   image: `${classPrefix}-image`,
   category: `${classPrefix}-category`,
   title: `${classPrefix}-title`,
@@ -42,7 +44,9 @@ ${recommendations.reduce(
     }" onclick="window.dataLayer?.push({ event:'recommendation-click', recommendationNumber: ${
       index + 1
     }, recommendationImageUri: '${imageUri}', recommendationTitle: '${title}' })">
-    <img src="${imageUri}" class="${classes.image}" alt="${title}" />
+    <div class="${classes.imageWrapper}">
+      <img src="${imageUri}" class="${classes.image}" alt="${title}" />
+    </div>
     <div>
       <h2 class="${classes.category}">${category}</h2>
       <h3 class="${classes.title}">${title}</h3>
