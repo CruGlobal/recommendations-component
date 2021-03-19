@@ -58,18 +58,22 @@ ${recommendations.reduce(
 export const cruRecommendationsComponent = {
   render: async ({
     container,
-    apiUri,
+    prod = false,
     pageUri = window.location.href,
     classNames,
   }: {
     container: Element;
-    apiUri: string;
+    prod?: boolean;
     pageUri?: string;
     classNames?: Partial<CssClasses>;
   }) => {
     try {
       const response = await fetch(
-        `${apiUri}${encodeURIComponent(pageUri)}.json`,
+        `${
+          prod
+            ? 'https://cru-content-based-filtering-prod.s3.amazonaws.com'
+            : 'https://cru-content-based-filtering-stage.s3.amazonaws.com'
+        }/${encodeURIComponent(pageUri)}.json`,
       );
       if (!response.ok) {
         throw new Error(response.statusText);
