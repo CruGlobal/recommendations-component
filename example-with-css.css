@@ -43,7 +43,8 @@
   display: block;
   width: 100%;
   border-radius: 4px;
-  transition: all 0.25s cubic-bezier(0.785, 0.135, 0.15, 0.86) 0s;
+  /* AEM seems to strip the `s` off if you specify a delay of `0s`, so `0.1ms` is a near zero value */
+  transition: all 0.25s cubic-bezier(0.785, 0.135, 0.15, 0.86) 0.1ms;
 }
 .cru-recommendations-component .cru-recommendations-component-category {
   font-size: 14px;
