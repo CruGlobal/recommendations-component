@@ -5,8 +5,6 @@ interface Recommendation {
   category: string;
 }
 
-const apiUri = 'https://cru-content-based-filtering.s3.amazonaws.com/';
-
 interface CssClasses {
   wrapper: string;
   header: string;
@@ -58,15 +56,21 @@ ${recommendations.reduce(
 `;
 
 export const cruRecommendationsComponent = {
-  render: async (
-    container: Element,
-    {
-      uri = window.location.href,
-      classNames,
-    }: { uri?: string; classNames?: Partial<CssClasses> } = {},
-  ) => {
+  render: async ({
+    container,
+    apiUri,
+    pageUri = window.location.href,
+    classNames,
+  }: {
+    container: Element;
+    apiUri: string;
+    pageUri?: string;
+    classNames?: Partial<CssClasses>;
+  }) => {
     try {
-      const response = await fetch(`${apiUri}${encodeURIComponent(uri)}.json`);
+      const response = await fetch(
+        `${apiUri}${encodeURIComponent(pageUri)}.json`,
+      );
       if (!response.ok) {
         throw new Error(response.statusText);
       }

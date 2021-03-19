@@ -10,22 +10,21 @@
 
     <script src="./index.ts"></script>
     <script>
-      window.cruRecommendationsComponent.render(
-        document.querySelector(
+      window.cruRecommendationsComponent.render({
+        container: document.querySelector(
           '#cru-recommendations-component-with-custom-classes',
         ),
-        {
-          uri:
-            'https://www.cru.org/us/en/about/partners/a-surprise-in-one-of-baltimores-toughest-neighborhoods.html',
-          classNames: {
-            wrapper: 'example-wrapper',
-            card: 'example-card',
-            image: 'example-image',
-            title: 'example-title',
-            description: 'example-description',
-          },
+        apiUri: 'https://cru-content-based-filtering-stage.s3.amazonaws.com/',
+        pageUri:
+          'https://www.cru.org/us/en/about/partners/a-surprise-in-one-of-baltimores-toughest-neighborhoods.html',
+        classNames: {
+          wrapper: 'example-wrapper',
+          card: 'example-card',
+          image: 'example-image',
+          title: 'example-title',
+          description: 'example-description',
         },
-      );
+      });
     </script>
   </body>
 </html>
