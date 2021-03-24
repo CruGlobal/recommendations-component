@@ -30,6 +30,7 @@ const defaultClassNames: CssClasses = {
 const recommendationsToHTML = (
   recommendations: Recommendation[],
   classes: CssClasses,
+  hideCategory,
 ) => `
 <div class="${classes.wrapper}">
   <h1 class="${classes.header}">Recommended Articles</h1>
@@ -46,7 +47,7 @@ ${recommendations.reduce(
       <img src="${imageUri}" class="${classes.image}" alt="${title}" />
     </div>
     <div>
-      <h2 class="${classes.category}">${category}</h2>
+      ${hideCategory ? '' : `<h2 class="${classes.category}">${category}</h2>`}
       <h3 class="${classes.title}">${title}</h3>
     </div>
   </a>`,
@@ -61,11 +62,13 @@ export const cruRecommendationsComponent = {
     prod = false,
     pageUri = window.location.href,
     classNames,
+    hideCategory = false,
   }: {
     container: Element;
     prod?: boolean;
     pageUri?: string;
     classNames?: Partial<CssClasses>;
+    hideCategory?: boolean;
   }) => {
     try {
       const response = await fetch(
@@ -79,10 +82,14 @@ export const cruRecommendationsComponent = {
         throw new Error(response.statusText);
       }
       const recommendations: Recommendation[] = await response.json();
-      container.innerHTML = recommendationsToHTML(recommendations, {
-        ...defaultClassNames,
-        ...classNames,
-      });
+      container.innerHTML = recommendationsToHTML(
+        recommendations,
+        {
+          ...defaultClassNames,
+          ...classNames,
+        },
+        hideCategory,
+      );
     } catch (error) {
       throw new Error(`Error loading/rendering recommendations: ${error}`);
     }
