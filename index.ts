@@ -33,7 +33,7 @@ const recommendationsToHTML = (
   hideCategory,
 ) => `
 <div class="${classes.wrapper}">
-  <h1 class="${classes.header}">Recommended Articles</h1>
+  <h2 class="${classes.header}">Recommended Articles</h2>
 ${recommendations.reduce(
   (output, { title, category, uri, imageUri }, index) =>
     `${output}
